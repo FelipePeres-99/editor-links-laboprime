@@ -1,16 +1,15 @@
 // src/routes/linkRoutes.ts
-
 import { Router } from 'express';
-import { LinkController } from '../controllers/LinkController.js';
+import { sharedLinkController } from '../controllers/SharedController.js';
 
 const router = Router();
-const linkController = new LinkController();
 
-// Rotas da API
-router.post('/api/links', linkController.createLink);
-router.get('/api/links', linkController.getAllLinks);
+console.log('🔧 Criando rotas de links...');
 
-// Rota de redirecionamento (deve ser a última)
-router.get('/:alias', linkController.redirectLink);
+// Usar a instância compartilhada
+router.post('/links', sharedLinkController.createLink);
+router.get('/links', sharedLinkController.getAllLinks);
+
+console.log('✅ Rotas de links criadas');
 
 export default router;

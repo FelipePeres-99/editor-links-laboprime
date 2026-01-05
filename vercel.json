@@ -1,18 +1,28 @@
 {
   "version": 2,
+  "buildCommand": "npm run vercel-build",
   "builds": [
     {
-      "src": "dist/index.js",
+      "src": "src/index.ts",
       "use": "@vercel/node",
       "config": {
-        "runtime": "nodejs18.x"
+        "includeFiles": "src/**/*.ts"
       }
     }
   ],
   "routes": [
     {
+      "src": "/api/(.*)",
+      "dest": "/src/index.ts"
+    },
+    {
       "src": "/(.*)",
-      "dest": "dist/index.js"
+      "dest": "/src/index.ts"
     }
-  ]
+  ],
+  "functions": {
+    "src/index.ts": {
+      "runtime": "nodejs18.x"
+    }
+  }
 }

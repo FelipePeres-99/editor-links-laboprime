@@ -12,15 +12,23 @@
   "description": "Editor de links para Laboprime",
   "main": "dist/index.js",
   "scripts": {
-    "dev": "nodemon src/index.ts",
+    "dev": "tsx watch src/index.ts",
     "build": "npx tsc",
     "start": "node dist/index.js",
-    "vercel-build": "echo 'Using pre-compiled files'"
+    "vercel-build": "npx tsc"
   },
-  "keywords": ["links", "editor", "laboprime", "typescript"],
+  "keywords": [
+    "links",
+    "editor",
+    "laboprime",
+    "typescript"
+  ],
   "author": "Patrick - Laboprime",
   "license": "ISC",
   "type": "module",
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "devDependencies": {
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.6",
@@ -30,6 +38,7 @@
     "concurrently": "^9.2.1",
     "nodemon": "^3.1.11",
     "ts-node": "^10.9.2",
+    "tsx": "^4.21.0",
     "typescript": "^5.9.3"
   }
 }
