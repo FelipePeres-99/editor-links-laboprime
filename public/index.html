@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editor de Links - Laboprime</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        
+        .form-container {
+            padding: 30px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e1e5e9;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+        
+        input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .result {
+            margin-top: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #28a745;
+            display: none;
+        }
+        
+        .result.error {
+            border-left-color: #dc3545;
+            background: #f8d7da;
+        }
+        
+        .short-url {
+            background: #e9ecef;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: monospace;
+            margin: 10px 0;
+            word-break: break-all;
+        }
+        
+        .copy-btn {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        
+        .loading {
+            display: none;
+            text-align: center;
+            color: #667eea;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔗 Editor de Links</h1>
+            <p>Transforme seus links em algo memorável</p>
+        </div>
+        
+        <div class="form-container">
+            <form id="linkForm">
+                <div class="form-group">
+                    <label for="originalUrl">🌐 URL Original:</label>
+                    <input 
+                        type="url" 
+                        id="originalUrl" 
+                        placeholder="https://wa.me/message/7MXJTS4YPPG7J1" 
+                        required
+                    >
+                </div>
+                
+                <div class="form-group">
+                    <label for="customAlias">✨ Alias Personalizado:</label>
+                    <input 
+                        type="text" 
+                        id="customAlias" 
+                        placeholder="oportunidade-whats" 
+                        pattern="[a-zA-Z0-9-_]+"
+                        title="Apenas letras, números, hífen e underscore"
+                        required
+                    >
+                </div>
+                
+                <div class="form-group">
+                    <label for="title">📝 Título:</label>
+                    <input 
+                        type="text" 
+                        id="title" 
+                        placeholder="Oportunidade! 🔥" 
+                        maxlength="100"
+                        required
+                    >
+                </div>
+                
+                <div class="form-group">
+                    <label for="emoji">😀 Emoji (opcional):</label>
+                    <input 
+                        type="text" 
+                        id="emoji" 
+                        placeholder="🔥"
+                        maxlength="10"
+                    >
+                </div>
+                
+                <button type="submit" class="btn">Criar Link Personalizado</button>
+            </form>
+            
+            <div class="loading" id="loading">
+                ⏳ Criando seu link...
+            </div>
+            
+            <div id="result" class="result"></div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('linkForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const loading = document.getElementById('loading');
+            const result = document.getElementById('result');
+            const form = e.target;
+            
+            // Mostra loading
+            loading.style.display = 'block';
+            result.style.display = 'none';
+            
+            // Coleta dados do formulário
+            const formData = {
+                originalUrl: document.getElementById('originalUrl').value,
+                customAlias: document.getElementById('customAlias').value,
+                title: document.getElementById('title').value,
+                emoji: document.getElementById('emoji').value || undefined
+            };
+            
+            try {
+                const response = await fetch('/api/links', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+                
+                const data = await response.json();
+                
+                loading.style.display = 'none';
+                result.style.display = 'block';
+                
+                if (data.status === 'success') {
+                    result.className = 'result';
+                    result.innerHTML = `
+                        <h3>✅ Link criado com sucesso!</h3>
+                        <p><strong>Título:</strong> ${data.data.title}</p>
+                        <p><strong>Link personalizado:</strong></p>
+                        <div class="short-url" id="shortUrl">${data.data.shortUrl}</div>
+                        <button class="copy-btn" onclick="copyToClipboard()">📋 Copiar Link</button>
+                        <p style="margin-top: 15px;"><strong>Cliques:</strong> ${data.data.clicks}</p>
+                    `;
+                    
+                    // Limpa o formulário
+                    form.reset();
+                } else {
+                    result.className = 'result error';
+                    result.innerHTML = `
+                        <h3>❌ Erro ao criar link</h3>
+                        <p>${data.error || data.message}</p>
+                    `;
+                }
+            } catch (error) {
+                loading.style.display = 'none';
+                result.style.display = 'block';
+                result.className = 'result error';
+                result.innerHTML = `
+                    <h3>❌ Erro de conexão</h3>
+                    <p>Não foi possível conectar com o servidor. Tente novamente.</p>
+                `;
+            }
+        });
+        
+        function copyToClipboard() {
+            const shortUrl = document.getElementById('shortUrl').textContent;
+            navigator.clipboard.writeText(shortUrl).then(() => {
+                alert('✅ Link copiado para a área de transferência!');
+            }).catch(() => {
+                alert('❌ Erro ao copiar. Selecione e copie manualmente.');
+            });
+        }
+        
+        // Validação em tempo real do alias
+        document.getElementById('customAlias').addEventListener('input', (e) => {
+            const value = e.target.value;
+            const isValid = /^[a-zA-Z0-9-_]*$/.test(value);
+            
+            if (!isValid && value.length > 0) {
+                e.target.style.borderColor = '#dc3545';
+            } else {
+                e.target.style.borderColor = '#e1e5e9';
+            }
+        });
+    </script>
+</body>
+</html>
