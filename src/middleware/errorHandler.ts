@@ -1,7 +1,7 @@
 // src/middleware/errorHandler.ts
 
 import { Request, Response, NextFunction } from 'express';
-import { ApiResponse, ResponseStatus } from '../models/Link';
+import { ApiResponse, ResponseStatus } from '../models/Link.js';
 
 export const errorHandler = (
   error: Error,

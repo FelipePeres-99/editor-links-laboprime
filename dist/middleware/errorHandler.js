@@ -1,5 +1,5 @@
 // src/middleware/errorHandler.ts
-import { ResponseStatus } from '../models/Link';
+import { ResponseStatus } from '../models/Link.js';
 export const errorHandler = (error, req, res, next) => {
     console.error('Error:', error);
     const response = {
