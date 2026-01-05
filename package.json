@@ -5,7 +5,8 @@
     "express": "^5.2.1",
     "helmet": "^8.1.0",
     "morgan": "^1.10.1",
-    "uuid": "^13.0.0"
+    "uuid": "^13.0.0",
+    "typescript": "^5.9.3"
   },
   "name": "editor-links-laboprime",
   "version": "1.0.0",
@@ -14,8 +15,7 @@
   "scripts": {
     "dev": "tsx watch src/index.ts",
     "build": "npx tsc",
-    "start": "node dist/index.js",
-    "vercel-build": "npx tsc"
+    "start": "node dist/index.js"
   },
   "keywords": [
     "links",
@@ -38,7 +38,6 @@
     "concurrently": "^9.2.1",
     "nodemon": "^3.1.11",
     "ts-node": "^10.9.2",
-    "tsx": "^4.21.0",
-    "typescript": "^5.9.3"
+    "tsx": "^4.21.0"
   }
 }
