@@ -1,10 +1,7 @@
-"use strict";
 // src/services/LinkService.ts
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.LinkService = void 0;
-const validators_1 = require("../utils/validators");
-const uuid_1 = require("uuid");
-class LinkService {
+import { Validators } from '../utils/validators';
+import { v4 as uuidv4 } from 'uuid';
+export class LinkService {
     constructor() {
         // Em produção, isso seria um banco de dados
         this.links = new Map();
@@ -14,13 +11,13 @@ class LinkService {
      */
     async createLink(linkData) {
         // Validações
-        if (!validators_1.Validators.isValidUrl(linkData.originalUrl)) {
+        if (!Validators.isValidUrl(linkData.originalUrl)) {
             throw new Error('URL inválida');
         }
-        if (!validators_1.Validators.isValidAlias(linkData.customAlias)) {
+        if (!Validators.isValidAlias(linkData.customAlias)) {
             throw new Error('Alias deve ter 3-50 caracteres e conter apenas letras, números, - e _');
         }
-        if (!validators_1.Validators.isValidTitle(linkData.title)) {
+        if (!Validators.isValidTitle(linkData.title)) {
             throw new Error('Título deve ter entre 1 e 100 caracteres');
         }
         // Verifica se alias já existe
@@ -29,10 +26,10 @@ class LinkService {
         }
         // Cria o link
         const newLink = {
-            id: (0, uuid_1.v4)(),
+            id: uuidv4(),
             originalUrl: linkData.originalUrl,
             customAlias: linkData.customAlias.toLowerCase(),
-            title: validators_1.Validators.sanitizeString(linkData.title),
+            title: Validators.sanitizeString(linkData.title),
             emoji: linkData.emoji,
             clicks: 0,
             createdAt: new Date(),
@@ -80,5 +77,3 @@ class LinkService {
         };
     }
 }
-exports.LinkService = LinkService;
-//# sourceMappingURL=LinkService.js.map

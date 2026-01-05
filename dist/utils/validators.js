@@ -1,8 +1,5 @@
-"use strict";
 // src/utils/validators.ts
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.Validators = void 0;
-class Validators {
+export class Validators {
     // Valida se é uma URL válida
     static isValidUrl(url) {
         try {
@@ -27,5 +24,3 @@ class Validators {
         return title.trim().length >= 1 && title.length <= 100;
     }
 }
-exports.Validators = Validators;
-//# sourceMappingURL=validators.js.map

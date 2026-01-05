@@ -1,14 +1,11 @@
-"use strict";
 // src/routes/linkRoutes.ts
-Object.defineProperty(exports, "__esModule", { value: true });
-const express_1 = require("express");
-const LinkController_1 = require("../controllers/LinkController");
-const router = (0, express_1.Router)();
-const linkController = new LinkController_1.LinkController();
+import { Router } from 'express';
+import { LinkController } from '../controllers/LinkController';
+const router = Router();
+const linkController = new LinkController();
 // Rotas da API
 router.post('/api/links', linkController.createLink);
 router.get('/api/links', linkController.getAllLinks);
 // Rota de redirecionamento (deve ser a última)
 router.get('/:alias', linkController.redirectLink);
-exports.default = router;
-//# sourceMappingURL=linkRoutes.js.map
+export default router;

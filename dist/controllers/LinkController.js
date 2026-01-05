@@ -1,10 +1,7 @@
-"use strict";
 // src/controllers/LinkController.ts
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.LinkController = void 0;
-const LinkService_1 = require("../services/LinkService");
-const Link_1 = require("../models/Link");
-class LinkController {
+import { LinkService } from '../services/LinkService';
+import { ResponseStatus } from '../models/Link';
+export class LinkController {
     constructor() {
         /**
          * Cria um novo link personalizado
@@ -19,7 +16,7 @@ class LinkController {
                 const baseUrl = process.env.BASE_URL || `${req.protocol}://${req.get('host')}`;
                 const responseData = this.linkService.linkToResponseDTO(newLink, baseUrl);
                 const response = {
-                    status: Link_1.ResponseStatus.SUCCESS,
+                    status: ResponseStatus.SUCCESS,
                     message: 'Link criado com sucesso!',
                     data: responseData
                 };
@@ -27,7 +24,7 @@ class LinkController {
             }
             catch (error) {
                 const response = {
-                    status: Link_1.ResponseStatus.ERROR,
+                    status: ResponseStatus.ERROR,
                     message: 'Erro ao criar link',
                     error: error instanceof Error ? error.message : 'Erro desconhecido'
                 };
@@ -44,7 +41,7 @@ class LinkController {
                 const link = await this.linkService.getLinkByAlias(alias);
                 if (!link || !link.isActive) {
                     res.status(404).json({
-                        status: Link_1.ResponseStatus.ERROR,
+                        status: ResponseStatus.ERROR,
                         message: 'Link não encontrado'
                     });
                     return;
@@ -56,7 +53,7 @@ class LinkController {
             }
             catch (error) {
                 res.status(500).json({
-                    status: Link_1.ResponseStatus.ERROR,
+                    status: ResponseStatus.ERROR,
                     message: 'Erro interno do servidor'
                 });
             }
@@ -71,7 +68,7 @@ class LinkController {
                 const baseUrl = process.env.BASE_URL || `${req.protocol}://${req.get('host')}`;
                 const responseData = links.map(link => this.linkService.linkToResponseDTO(link, baseUrl));
                 const response = {
-                    status: Link_1.ResponseStatus.SUCCESS,
+                    status: ResponseStatus.SUCCESS,
                     message: 'Links recuperados com sucesso',
                     data: responseData
                 };
@@ -79,13 +76,11 @@ class LinkController {
             }
             catch (error) {
                 res.status(500).json({
-                    status: Link_1.ResponseStatus.ERROR,
+                    status: ResponseStatus.ERROR,
                     message: 'Erro ao buscar links'
                 });
             }
         };
-        this.linkService = new LinkService_1.LinkService();
+        this.linkService = new LinkService();
     }
 }
-exports.LinkController = LinkController;
-//# sourceMappingURL=LinkController.js.map
