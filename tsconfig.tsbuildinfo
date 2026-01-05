@@ -1,0 +1,1 @@
+{"root":["./src/index.ts","./src/controllers/linkcontroller.ts","./src/middleware/errorhandler.ts","./src/models/link.ts","./src/routes/linkroutes.ts","./src/services/linkservice.ts","./src/utils/validators.ts"],"version":"5.9.3"}
