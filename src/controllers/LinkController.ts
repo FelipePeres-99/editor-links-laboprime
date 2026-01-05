@@ -1,7 +1,7 @@
 // src/controllers/LinkController.ts
 
 import { Request, Response } from 'express';
-import { LinkService } from '../services/LinkService';
+import { LinkService } from '../services/LinkService.js';
 import { CreateLinkDTO, ApiResponse, ResponseStatus } from '../models/Link';
 
 export class LinkController {

@@ -1,5 +1,5 @@
 // src/controllers/LinkController.ts
-import { LinkService } from '../services/LinkService';
+import { LinkService } from '../services/LinkService.js';
 import { ResponseStatus } from '../models/Link';
 export class LinkController {
     constructor() {

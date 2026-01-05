@@ -1,7 +1,7 @@
 // src/routes/linkRoutes.ts
 
 import { Router } from 'express';
-import { LinkController } from '../controllers/LinkController';
+import { LinkController } from '../controllers/LinkController.js';
 
 const router = Router();
 const linkController = new LinkController();

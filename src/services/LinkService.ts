@@ -1,7 +1,7 @@
 // src/services/LinkService.ts
 
-import { Link, CreateLinkDTO, LinkResponseDTO } from '../models/Link';
-import { Validators } from '../utils/validators';
+import { Link, CreateLinkDTO, LinkResponseDTO } from '../models/Link.js';
+import { Validators } from '../utils/validators.js';
 import { v4 as uuidv4 } from 'uuid';
 
 export class LinkService {

@@ -1,5 +1,5 @@
 // src/services/LinkService.ts
-import { Validators } from '../utils/validators';
+import { Validators } from '../utils/validators.js';
 import { v4 as uuidv4 } from 'uuid';
 export class LinkService {
     constructor() {
