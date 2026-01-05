@@ -1,13 +1,9 @@
 {
   "version": 2,
-  "buildCommand": "npm run vercel-build",
   "builds": [
     {
       "src": "src/index.ts",
-      "use": "@vercel/node",
-      "config": {
-        "includeFiles": "src/**/*.ts"
-      }
+      "use": "@vercel/node"
     }
   ],
   "routes": [
@@ -19,10 +15,5 @@
       "src": "/(.*)",
       "dest": "/src/index.ts"
     }
-  ],
-  "functions": {
-    "src/index.ts": {
-      "runtime": "nodejs18.x"
-    }
-  }
+  ]
 }
