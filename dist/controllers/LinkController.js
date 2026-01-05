@@ -14,7 +14,30 @@ export class LinkController {
         try {
             console.log('📝 Rota POST /api/links acessada!');
             console.log('Body recebido:', req.body);
-            const linkData = req.body;
+            // CORREÇÃO: Validação melhorada antes de usar os dados
+            const { originalUrl, customAlias, title, emoji } = req.body;
+            if (!originalUrl || typeof originalUrl !== 'string' || originalUrl.trim().length === 0) {
+                const response = {
+                    status: ResponseStatus.ERROR,
+                    message: 'URL original é obrigatória',
+                    error: 'URL original é obrigatória'
+                };
+                return res.status(400).json(response);
+            }
+            if (!customAlias || typeof customAlias !== 'string' || customAlias.trim().length === 0) {
+                const response = {
+                    status: ResponseStatus.ERROR,
+                    message: 'Alias é obrigatório',
+                    error: 'Alias é obrigatório'
+                };
+                return res.status(400).json(response);
+            }
+            const linkData = {
+                originalUrl: originalUrl.trim(),
+                customAlias: customAlias.trim(),
+                title: title?.trim() || '',
+                emoji: emoji?.trim() || ''
+            };
             // Cria o link
             const newLink = await this.linkService.createLink(linkData);
             // Converte para DTO de resposta
