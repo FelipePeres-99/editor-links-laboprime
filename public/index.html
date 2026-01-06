@@ -3,271 +3,765 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editor de Links - Laboprime</title>
+    <title>Laboprime Links - Encurtador Profissional</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
+        /* Reset e Base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             padding: 20px;
-        }
-        
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-            overflow: hidden;
-        }
-        
-        .header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 30px;
-            text-align: center;
-        }
-        
-        .header h1 {
-            font-size: 2rem;
-            margin-bottom: 10px;
-        }
-        
-        .form-container {
-            padding: 30px;
-        }
-        
-        .form-group {
-            margin-bottom: 20px;
-        }
-        
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
             color: #333;
         }
-        
-        input {
-            width: 100%;
-            padding: 12px 15px;
-            border: 2px solid #e1e5e9;
-            border-radius: 8px;
-            font-size: 16px;
-            transition: border-color 0.3s ease;
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
         }
-        
-        input:focus {
+
+        /* Card Principal */
+        .main-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: 600px;
+            overflow: hidden;
+            margin-bottom: 40px;
+        }
+
+        /* Painel Esquerdo */
+        .left-panel {
+            background: linear-gradient(135deg, #2D1B69 0%, #11998e 100%);
+            color: white;
+            padding: 60px 40px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        .left-panel::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="rgba(255,255,255,0.03)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .brand-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .logo-section {
+            margin-bottom: 40px;
+        }
+
+        .brand-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            background: linear-gradient(45deg, #fff, #a8edea);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .brand-subtitle {
+            font-size: 1.1rem;
+            font-weight: 300;
+            opacity: 0.8;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .hero-text {
+            margin-bottom: 40px;
+        }
+
+        .hero-title {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            line-height: 1.2;
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        .features {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+
+        .feature-icon {
+            font-size: 1.2rem;
+        }
+
+        .slide-indicators {
+            display: flex;
+            gap: 8px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .indicator.active {
+            background: white;
+            transform: scale(1.2);
+        }
+
+        /* Painel Direito */
+        .right-panel {
+            padding: 60px 40px;
+            display: flex;
+            align-items: center;
+        }
+
+        .form-container {
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .form-header {
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .form-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #2D1B69;
+        }
+
+        .form-subtitle {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        /* Formulário */
+        .link-form {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .input-label {
+            font-weight: 500;
+            color: #333;
+            font-size: 0.9rem;
+        }
+
+        .form-input {
+            padding: 16px 20px;
+            border: 2px solid #e1e5e9;
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: #fafbfc;
+        }
+
+        .form-input:focus {
             outline: none;
             border-color: #667eea;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
         }
-        
-        .btn {
-            width: 100%;
-            padding: 15px;
+
+        .alias-input-container {
+            display: flex;
+            align-items: center;
+            border: 2px solid #e1e5e9;
+            border-radius: 12px;
+            background: #fafbfc;
+            transition: all 0.3s ease;
+        }
+
+        .alias-input-container:focus-within {
+            border-color: #667eea;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .domain-prefix {
+            padding: 16px 0 16px 20px;
+            color: #666;
+            font-size: 1rem;
+            background: transparent;
+        }
+
+        .alias-input {
+            border: none !important;
+            background: transparent !important;
+            padding: 16px 20px 16px 0 !important;
+            box-shadow: none !important;
+        }
+
+        .submit-btn {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             border: none;
-            border-radius: 8px;
-            font-size: 16px;
+            padding: 18px 32px;
+            border-radius: 12px;
+            font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
-            transition: transform 0.2s ease;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 16px;
         }
-        
-        .btn:hover {
+
+        .submit-btn:hover {
             transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
         }
-        
-        .result {
-            margin-top: 30px;
-            padding: 20px;
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Resultado */
+        .result-container {
+            margin-top: 32px;
+            padding: 24px;
             background: #f8f9fa;
+            border-radius: 16px;
+            border: 2px solid #e8f5e8;
+        }
+
+        .result-title {
+            color: #2D1B69;
+            margin-bottom: 16px;
+            font-size: 1.1rem;
+        }
+
+        .result-link {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .result-input {
+            flex: 1;
+            padding: 12px 16px;
+            border: 1px solid #ddd;
             border-radius: 8px;
-            border-left: 4px solid #28a745;
-            display: none;
+            background: white;
+            font-size: 0.9rem;
         }
-        
-        .result.error {
-            border-left-color: #dc3545;
-            background: #f8d7da;
-        }
-        
-        .short-url {
-            background: #e9ecef;
-            padding: 10px;
-            border-radius: 5px;
-            font-family: monospace;
-            margin: 10px 0;
-            word-break: break-all;
-        }
-        
+
         .copy-btn {
-            background: #28a745;
+            padding: 12px 20px;
+            background: #2D1B69;
             color: white;
             border: none;
-            padding: 8px 15px;
-            border-radius: 5px;
+            border-radius: 8px;
             cursor: pointer;
-            margin-top: 10px;
+            font-weight: 500;
+            transition: all 0.3s ease;
         }
-        
-        .loading {
-            display: none;
+
+        .copy-btn:hover {
+            background: #1a0f3d;
+        }
+
+        .result-stats {
+            display: flex;
+            gap: 16px;
+        }
+
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Links Section */
+        .links-section {
+            margin-top: 40px;
+        }
+
+        .section-title {
+            color: white;
+            font-size: 1.5rem;
+            margin-bottom: 24px;
             text-align: center;
+        }
+
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .link-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 24px;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .link-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .link-title {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #2D1B69;
+        }
+
+        .link-url {
             color: #667eea;
+            font-size: 0.9rem;
+            margin-bottom: 12px;
+            word-break: break-all;
+        }
+
+        .link-stats {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #666;
+            font-size: 0.85rem;
+        }
+
+        /* Toast de erro */
+        .error-toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #ff4757;
+            color: white;
+            padding: 16px 24px;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(255, 71, 87, 0.3);
+            z-index: 1000;
+            animation: slideInRight 0.3s ease-out;
+        }
+
+        /* Responsivo */
+        @media (max-width: 768px) {
+            .main-card {
+                grid-template-columns: 1fr;
+                min-height: auto;
+            }
+            
+            .left-panel {
+                padding: 40px 24px;
+            }
+            
+            .right-panel {
+                padding: 40px 24px;
+            }
+            
+            .brand-title {
+                font-size: 2rem;
+            }
+            
+            .hero-title {
+                font-size: 1.5rem;
+            }
+            
+            .form-title {
+                font-size: 1.5rem;
+            }
+
+            .result-link {
+                flex-direction: column;
+            }
+
+            .copy-btn {
+                width: 100%;
+            }
+        }
+
+        /* Animações */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .main-card {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .result-container {
+            animation: fadeInUp 0.4s ease-out;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="header">
-            <h1>🔗 Editor de Links</h1>
-            <p>Transforme seus links em algo memorável</p>
-        </div>
-        
-        <div class="form-container">
-            <form id="linkForm">
-                <div class="form-group">
-                    <label for="originalUrl">🌐 URL Original:</label>
-                    <input 
-                        type="url" 
-                        id="originalUrl" 
-                        placeholder="https://wa.me/message/7MXJTS4YPPG7J1" 
-                        required
-                    >
+        <!-- Card Principal -->
+        <div class="main-card">
+            <!-- Lado Esquerdo - Visual/Branding -->
+            <div class="left-panel">
+                <div class="brand-content">
+                    <div class="logo-section">
+                        <h1 class="brand-title">Laboprime</h1>
+                        <span class="brand-subtitle">Links</span>
+                    </div>
+                    
+                    <div class="hero-text">
+                        <h2 class="hero-title">Transforme seus links</h2>
+                        <p class="hero-description">Crie links personalizados e profissionais para suas campanhas</p>
+                    </div>
+                    
+                    <div class="features">
+                        <div class="feature-item">
+                            <span class="feature-icon">🔗</span>
+                            <span>Links personalizados</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">📊</span>
+                            <span>Analytics em tempo real</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">🚀</span>
+                            <span>Redirecionamento rápido</span>
+                        </div>
+                    </div>
                 </div>
                 
-                <div class="form-group">
-                    <label for="customAlias">✨ Alias Personalizado:</label>
-                    <input 
-                        type="text" 
-                        id="customAlias" 
-                        placeholder="oportunidade-whats" 
-                        pattern="[a-zA-Z0-9-_]+"
-                        title="Apenas letras, números, hífen e underscore"
-                        required
-                    >
+                <!-- Indicadores de slide (decorativo) -->
+                <div class="slide-indicators">
+                    <span class="indicator active"></span>
+                    <span class="indicator"></span>
+                    <span class="indicator"></span>
                 </div>
-                
-                <div class="form-group">
-                    <label for="title">📝 Título:</label>
-                    <input 
-                        type="text" 
-                        id="title" 
-                        placeholder="Oportunidade! 🔥" 
-                        maxlength="100"
-                        required
-                    >
-                </div>
-                
-                <div class="form-group">
-                    <label for="emoji">😀 Emoji (opcional):</label>
-                    <input 
-                        type="text" 
-                        id="emoji" 
-                        placeholder="🔥"
-                        maxlength="10"
-                    >
-                </div>
-                
-                <button type="submit" class="btn">Criar Link Personalizado</button>
-            </form>
-            
-            <div class="loading" id="loading">
-                ⏳ Criando seu link...
             </div>
-            
-            <div id="result" class="result"></div>
+
+            <!-- Lado Direito - Formulário -->
+            <div class="right-panel">
+                <div class="form-container">
+                    <div class="form-header">
+                        <h3 class="form-title">Criar Link Personalizado</h3>
+                        <p class="form-subtitle">Transforme seus links longos em URLs profissionais</p>
+                    </div>
+
+                    <form id="linkForm" class="link-form">
+                        <div class="input-group">
+                            <label for="originalUrl" class="input-label">URL Original</label>
+                            <input 
+                                type="url" 
+                                id="originalUrl" 
+                                name="originalUrl"
+                                placeholder="https://wa.me/message/7MXJTS4YPPG7J1"
+                                class="form-input"
+                                required
+                            >
+                        </div>
+
+                        <div class="input-group">
+                            <label for="customAlias" class="input-label">Alias Personalizado</label>
+                            <div class="alias-input-container">
+                                <span class="domain-prefix">laboprime.com/</span>
+                                <input 
+                                    type="text" 
+                                    id="customAlias" 
+                                    name="customAlias"
+                                    placeholder="oportunidade"
+                                    class="form-input alias-input"
+                                    pattern="[a-zA-Z0-9-_]+"
+                                    title="Apenas letras, números, hífen e underscore"
+                                    required
+                                >
+                            </div>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="title" class="input-label">Título (Opcional)</label>
+                            <input 
+                                type="text" 
+                                id="title" 
+                                name="title"
+                                placeholder="Oportunidade! 🔥"
+                                class="form-input"
+                                maxlength="100"
+                            >
+                        </div>
+
+                        <button type="submit" class="submit-btn">
+                            <span class="btn-text">Criar Link</span>
+                            <span class="btn-icon">✨</span>
+                        </button>
+                    </form>
+
+                    <!-- Resultado -->
+                    <div id="result" class="result-container" style="display: none;">
+                        <div class="result-success">
+                            <h4 class="result-title">Link criado com sucesso! 🎉</h4>
+                            <div class="result-link">
+                                <input type="text" id="generatedLink" class="result-input" readonly>
+                                <button id="copyBtn" class="copy-btn">Copiar</button>
+                            </div>
+                            <div class="result-stats">
+                                <span class="stat-item">
+                                    <span class="stat-icon">👁️</span>
+                                    <span id="clickCount">0 cliques</span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Links Criados -->
+        <div class="links-section">
+            <h3 class="section-title">Seus Links</h3>
+            <div id="linksList" class="links-grid">
+                <!-- Links serão inseridos aqui via JavaScript -->
+            </div>
         </div>
     </div>
 
     <script>
-        document.getElementById('linkForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            
-            const loading = document.getElementById('loading');
-            const result = document.getElementById('result');
-            const form = e.target;
-            
-            // Mostra loading
-            loading.style.display = 'block';
-            result.style.display = 'none';
-            
-            // Coleta dados do formulário
-            const formData = {
-                originalUrl: document.getElementById('originalUrl').value,
-                customAlias: document.getElementById('customAlias').value,
-                title: document.getElementById('title').value,
-                emoji: document.getElementById('emoji').value || undefined
-            };
-            
-            try {
-                const response = await fetch('/api/links', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(formData)
-                });
-                
-                const data = await response.json();
-                
-                loading.style.display = 'none';
-                result.style.display = 'block';
-                
-                if (data.status === 'success') {
-                    result.className = 'result';
-                    result.innerHTML = `
-                        <h3>✅ Link criado com sucesso!</h3>
-                        <p><strong>Título:</strong> ${data.data.title}</p>
-                        <p><strong>Link personalizado:</strong></p>
-                        <div class="short-url" id="shortUrl">${data.data.shortUrl}</div>
-                        <button class="copy-btn" onclick="copyToClipboard()">📋 Copiar Link</button>
-                        <p style="margin-top: 15px;"><strong>Cliques:</strong> ${data.data.clicks}</p>
-                    `;
+        class LinkManager {
+            constructor() {
+                this.apiBase = window.location.origin;
+                this.init();
+            }
+
+            init() {
+                this.bindEvents();
+                this.loadLinks();
+            }
+
+            bindEvents() {
+                const form = document.getElementById('linkForm');
+                const copyBtn = document.getElementById('copyBtn');
+
+                form.addEventListener('submit', (e) => this.handleSubmit(e));
+                copyBtn?.addEventListener('click', () => this.copyToClipboard());
+
+                // Validação em tempo real do alias
+                const aliasInput = document.getElementById('customAlias');
+                aliasInput.addEventListener('input', (e) => {
+                    const value = e.target.value;
+                    const isValid = /^[a-zA-Z0-9-_]*$/.test(value);
                     
-                    // Limpa o formulário
-                    form.reset();
-                } else {
-                    result.className = 'result error';
-                    result.innerHTML = `
-                        <h3>❌ Erro ao criar link</h3>
-                        <p>${data.error || data.message}</p>
-                    `;
+                    if (!isValid && value.length > 0) {
+                        e.target.style.borderColor = '#ff4757';
+                    } else {
+                        e.target.style.borderColor = '#e1e5e9';
+                    }
+                });
+            }
+
+            async handleSubmit(e) {
+                e.preventDefault();
+                
+                const submitBtn = e.target.querySelector('.submit-btn');
+                const originalText = submitBtn.innerHTML;
+                
+                // Loading state
+                submitBtn.innerHTML = '<span class="btn-text">Criando...</span><span class="btn-icon">⏳</span>';
+                submitBtn.disabled = true;
+
+                try {
+                    const formData = new FormData(e.target);
+                    const data = {
+                        originalUrl: formData.get('originalUrl'),
+                        customAlias: formData.get('customAlias'),
+                        title: formData.get('title') || ''
+                    };
+
+                    const response = await fetch(`${this.apiBase}/api/links`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(data)
+                    });
+
+                    const result = await response.json();
+
+                    if (result.status === 'success') {
+                        this.showResult(result.data);
+                        this.loadLinks();
+                        e.target.reset();
+                    } else {
+                        throw new Error(result.message);
+                    }
+
+                } catch (error) {
+                    this.showError(error.message);
+                } finally {
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
                 }
-            } catch (error) {
-                loading.style.display = 'none';
-                result.style.display = 'block';
-                result.className = 'result error';
-                result.innerHTML = `
-                    <h3>❌ Erro de conexão</h3>
-                    <p>Não foi possível conectar com o servidor. Tente novamente.</p>
-                `;
             }
-        });
-        
-        function copyToClipboard() {
-            const shortUrl = document.getElementById('shortUrl').textContent;
-            navigator.clipboard.writeText(shortUrl).then(() => {
-                alert('✅ Link copiado para a área de transferência!');
-            }).catch(() => {
-                alert('❌ Erro ao copiar. Selecione e copie manualmente.');
-            });
+
+            showResult(data) {
+                const resultContainer = document.getElementById('result');
+                const generatedLink = document.getElementById('generatedLink');
+                const clickCount = document.getElementById('clickCount');
+
+                generatedLink.value = data.shortUrl;
+                clickCount.textContent = `${data.clicks || 0} cliques`;
+                
+                resultContainer.style.display = 'block';
+                resultContainer.scrollIntoView({ behavior: 'smooth' });
+            }
+
+            showError(message) {
+                // Criar toast de erro
+                const toast = document.createElement('div');
+                toast.className = 'error-toast';
+                toast.textContent = message;
+
+                document.body.appendChild(toast);
+
+                setTimeout(() => {
+                    toast.remove();
+                }, 5000);
+            }
+
+            async copyToClipboard() {
+                const generatedLink = document.getElementById('generatedLink');
+                const copyBtn = document.getElementById('copyBtn');
+                
+                try {
+                    await navigator.clipboard.writeText(generatedLink.value);
+                    
+                    const originalText = copyBtn.textContent;
+                    copyBtn.textContent = 'Copiado!';
+                    copyBtn.style.background = '#2ed573';
+                    
+                    setTimeout(() => {
+                        copyBtn.textContent = originalText;
+                        copyBtn.style.background = '#2D1B69';
+                    }, 2000);
+                    
+                } catch (error) {
+                    console.error('Erro ao copiar:', error);
+                    // Fallback para navegadores mais antigos
+                    generatedLink.select();
+                    document.execCommand('copy');
+                    
+                    const originalText = copyBtn.textContent;
+                    copyBtn.textContent = 'Copiado!';
+                    setTimeout(() => {
+                        copyBtn.textContent = originalText;
+                    }, 2000);
+                }
+            }
+
+            async loadLinks() {
+                try {
+                    const response = await fetch(`${this.apiBase}/api/links`);
+                    const result = await response.json();
+
+                    if (result.status === 'success') {
+                        this.renderLinks(result.data);
+                    }
+                } catch (error) {
+                    console.error('Erro ao carregar links:', error);
+                }
+            }
+
+            renderLinks(links) {
+                const linksList = document.getElementById('linksList');
+                
+                if (links.length === 0) {
+                    linksList.innerHTML = `
+                        <div style="grid-column: 1 / -1; text-align: center; color: rgba(255,255,255,0.7); padding: 40px;">
+                            <p>Nenhum link criado ainda. Crie seu primeiro link acima! 🚀</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                linksList.innerHTML = links.map(link => `
+                    <div class="link-card">
+                        <h4 class="link-title">${link.title || 'Link sem título'}</h4>
+                        <p class="link-url">${link.shortUrl}</p>
+                        <div class="link-stats">
+                            <span>👁️ ${link.clicks || 0} cliques</span>
+                            <span>📅 ${new Date(link.createdAt).toLocaleDateString('pt-BR')}</span>
+                        </div>
+                    </div>
+                `).join('');
+            }
         }
-        
-        // Validação em tempo real do alias
-        document.getElementById('customAlias').addEventListener('input', (e) => {
-            const value = e.target.value;
-            const isValid = /^[a-zA-Z0-9-_]*$/.test(value);
-            
-            if (!isValid && value.length > 0) {
-                e.target.style.borderColor = '#dc3545';
-            } else {
-                e.target.style.borderColor = '#e1e5e9';
-            }
+
+        // Inicializar quando a página carregar
+        document.addEventListener('DOMContentLoaded', () => {
+            new LinkManager();
         });
     </script>
 </body>
