@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Laboprime Links - Encurtador Profissional</title>
+    <title>LinkShort - Encurtador Profissional</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         /* Reset e Base */
@@ -15,7 +15,7 @@
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #0f172a;
             min-height: 100vh;
             padding: 20px;
             color: #333;
@@ -28,20 +28,20 @@
 
         /* Card Principal */
         .main-card {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.98);
             border-radius: 24px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.15);
             display: grid;
             grid-template-columns: 1fr 1fr;
             min-height: 600px;
             overflow: hidden;
             margin-bottom: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         /* Painel Esquerdo */
         .left-panel {
-            background: linear-gradient(135deg, #2D1B69 0%, #11998e 100%);
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
             color: white;
             padding: 60px 40px 40px;
             display: flex;
@@ -57,8 +57,8 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="rgba(255,255,255,0.03)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
-            opacity: 0.3;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="rgba(255,255,255,0.05)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.4;
         }
 
         .brand-content {
@@ -74,7 +74,7 @@
             font-size: 2.5rem;
             font-weight: 700;
             margin-bottom: 8px;
-            background: linear-gradient(45deg, #fff, #a8edea);
+            background: linear-gradient(45deg, #fff, #bfdbfe);
             background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -83,7 +83,7 @@
         .brand-subtitle {
             font-size: 1.1rem;
             font-weight: 300;
-            opacity: 0.8;
+            opacity: 0.9;
             letter-spacing: 2px;
             text-transform: uppercase;
         }
@@ -165,7 +165,7 @@
             font-size: 1.8rem;
             font-weight: 600;
             margin-bottom: 8px;
-            color: #2D1B69;
+            color: #1e40af;
         }
 
         .form-subtitle {
@@ -204,9 +204,9 @@
 
         .form-input:focus {
             outline: none;
-            border-color: #667eea;
+            border-color: #3b82f6;
             background: white;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
         }
 
         .alias-input-container {
@@ -219,9 +219,9 @@
         }
 
         .alias-input-container:focus-within {
-            border-color: #667eea;
+            border-color: #3b82f6;
             background: white;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
         }
 
         .domain-prefix {
@@ -239,7 +239,7 @@
         }
 
         .submit-btn {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
             color: white;
             border: none;
             padding: 18px 32px;
@@ -257,7 +257,7 @@
 
         .submit-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
         }
 
         .submit-btn:active {
@@ -274,13 +274,13 @@
         .result-container {
             margin-top: 32px;
             padding: 24px;
-            background: #f8f9fa;
+            background: #f0f9ff;
             border-radius: 16px;
-            border: 2px solid #e8f5e8;
+            border: 2px solid #bfdbfe;
         }
 
         .result-title {
-            color: #2D1B69;
+            color: #1e40af;
             margin-bottom: 16px;
             font-size: 1.1rem;
         }
@@ -302,7 +302,7 @@
 
         .copy-btn {
             padding: 12px 20px;
-            background: #2D1B69;
+            background: #1e40af;
             color: white;
             border: none;
             border-radius: 8px;
@@ -312,7 +312,7 @@
         }
 
         .copy-btn:hover {
-            background: #1a0f3d;
+            background: #1e3a8a;
         }
 
         .result-stats {
@@ -347,12 +347,12 @@
         }
 
         .link-card {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.98);
             padding: 24px;
             border-radius: 16px;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .link-card:hover {
@@ -363,11 +363,11 @@
         .link-title {
             font-weight: 600;
             margin-bottom: 8px;
-            color: #2D1B69;
+            color: #1e40af;
         }
 
         .link-url {
-            color: #667eea;
+            color: #3b82f6;
             font-size: 0.9rem;
             margin-bottom: 12px;
             word-break: break-all;
@@ -386,11 +386,11 @@
             position: fixed;
             top: 20px;
             right: 20px;
-            background: #ff4757;
+            background: #dc2626;
             color: white;
             padding: 16px 24px;
             border-radius: 12px;
-            box-shadow: 0 8px 32px rgba(255, 71, 87, 0.3);
+            box-shadow: 0 8px 32px rgba(220, 38, 38, 0.3);
             z-index: 1000;
             animation: slideInRight 0.3s ease-out;
         }
@@ -471,8 +471,8 @@
             <div class="left-panel">
                 <div class="brand-content">
                     <div class="logo-section">
-                        <h1 class="brand-title">Laboprime</h1>
-                        <span class="brand-subtitle">Links</span>
+                        <h1 class="brand-title">LinkShort</h1>
+                        <span class="brand-subtitle">Pro</span>
                     </div>
                     
                     <div class="hero-text">
@@ -519,7 +519,7 @@
                                 type="url" 
                                 id="originalUrl" 
                                 name="originalUrl"
-                                placeholder="https://wa.me/message/7MXJTS4YPPG7J1"
+                                placeholder="https://example.com/sua-url-longa"
                                 class="form-input"
                                 required
                             >
@@ -528,12 +528,12 @@
                         <div class="input-group">
                             <label for="customAlias" class="input-label">Alias Personalizado</label>
                             <div class="alias-input-container">
-                                <span class="domain-prefix">laboprime.com/</span>
+                                <span class="domain-prefix">short.ly/</span>
                                 <input 
                                     type="text" 
                                     id="customAlias" 
                                     name="customAlias"
-                                    placeholder="oportunidade"
+                                    placeholder="meu-link"
                                     class="form-input alias-input"
                                     pattern="[a-zA-Z0-9-_]+"
                                     title="Apenas letras, números, hífen e underscore"
@@ -548,7 +548,7 @@
                                 type="text" 
                                 id="title" 
                                 name="title"
-                                placeholder="Oportunidade! 🔥"
+                                placeholder="Meu Link Personalizado"
                                 class="form-input"
                                 maxlength="100"
                             >
@@ -615,7 +615,7 @@
                     const isValid = /^[a-zA-Z0-9-_]*$/.test(value);
                     
                     if (!isValid && value.length > 0) {
-                        e.target.style.borderColor = '#ff4757';
+                        e.target.style.borderColor = '#dc2626';
                     } else {
                         e.target.style.borderColor = '#e1e5e9';
                     }
@@ -700,11 +700,11 @@
                     
                     const originalText = copyBtn.textContent;
                     copyBtn.textContent = 'Copiado!';
-                    copyBtn.style.background = '#2ed573';
+                    copyBtn.style.background = '#10b981';
                     
                     setTimeout(() => {
                         copyBtn.textContent = originalText;
-                        copyBtn.style.background = '#2D1B69';
+                        copyBtn.style.background = '#1e40af';
                     }, 2000);
                     
                 } catch (error) {
